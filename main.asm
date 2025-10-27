@@ -62,9 +62,9 @@ no_change:
 play_alarm:
 	ldi temp, 250 ; 500ms / 2 = (250 cycles)
 tone_loop:
-	sbi PORTB, BUZZER ; Buzzer pin set high
+	sbi PORTE4, BUZZER ; Buzzer pin set high
 	rcall delay_500us
-	cbi PORTB, BUZZER; Buzzer pin set low
+	cbi PORTE4, BUZZER; Buzzer pin set low
 	rcall delay_500us
 	dec temp
 	brne tone_loop
@@ -113,5 +113,6 @@ Loop25:	dec r19
 		dec r18
 		brne Loop15
 		ret
+
 
 
