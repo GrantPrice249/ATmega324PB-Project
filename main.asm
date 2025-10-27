@@ -70,6 +70,7 @@ AUTO_DECREMENT:
 			RJMP NOT_RELEASED
 
 	; Decrement counter every 100ms. When counter == 0, go to alarm
+	BREQ ALARM
 	DEC_LOOP:
 		DEC counter
 		BREQ ALARM
@@ -135,6 +136,7 @@ Loop25:	dec r19
 		dec r18
 		brne Loop15
 		ret
+
 
 
 
