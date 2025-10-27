@@ -40,6 +40,10 @@ counter_loop:
     in r19, PINA         ; read current button state
     and r19, r18         ; mask to PA0 and PA1
 
+	; Auto-Decrement Button
+	SBIS PORTA, 2
+		RCALL AUTO_DECREMENT
+
     ; Check for button press and release
     cp r19, r17          ; compare current and previous state
     breq no_change       ; if same, reset loop
@@ -58,6 +62,23 @@ counter_loop:
 
 no_change:
     rjmp counter_loop       ; repeat loop
+
+AUTO_DECREMENT:
+	; Wait for button to be released
+	NOT_RELEASED:
+		SBIC PINA, 2
+			RJMP NOT_RELEASED
+
+	; Decrement counter every 100ms. When counter == 0, go to alarm
+	DEC_LOOP:
+		DEC counter
+		BREQ ALARM
+		RCALL delay_100ms
+		RJMP DEC_LOOP
+
+	ALARM:
+		RCALL play_alarm
+		RET
 
 ;plays 1kHz for .499s
 play_alarm:
@@ -114,6 +135,7 @@ Loop25:	dec r19
 		dec r18
 		brne Loop15
 		ret
+
 
 
 
