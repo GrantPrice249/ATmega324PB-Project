@@ -45,14 +45,14 @@ LED_ON:
 	CBI PORTE, 5
 	RET
 
-
 main:
-	rjmp counter_loop
+	rcall counter_loop
 	rcall LED_ON
 
 	; Auto-Decrement Button
 	SBIS PORTA, 2
 		RCALL AUTO_DECREMENT
+	rjump main
 	
 
 counter_loop:
@@ -160,6 +160,7 @@ Loop25:	dec r19
 		dec r18
 		brne Loop15
 		ret
+
 
 
 
