@@ -58,7 +58,6 @@ counter_loop:
 
     ; Update previous state
     mov r17, r19
-	rjmp counter_loop       ; repeat loop
 
 no_change:
     rjmp counter_loop       ; repeat loop
@@ -136,6 +135,7 @@ Loop25:	dec r19
 		dec r18
 		brne Loop15
 		ret
+
 
 
 
