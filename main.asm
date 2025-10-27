@@ -1,6 +1,7 @@
 .def counter = r16
 .equ BUZZER = 0
 
+; Stack Pointer initialization
 .ORG 0
 LDI counter, HIGH(RAMEND)
 OUT SPH, counter
@@ -142,6 +143,7 @@ Loop25:	dec r19
 		dec r18
 		brne Loop15
 		ret
+
 
 
 
