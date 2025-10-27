@@ -8,7 +8,7 @@ ldi r18, 0x03        ; Mask for PA0 and PA1
 ; set PORTA as input
 ldi r20, 0x00
 out DDRA, r20        ; set PA0 and PA1 as input
-ldi r20, 0x03
+ldi r20, 0x07
 out PORTA, r20
 
 ; LED Setup
@@ -114,6 +114,7 @@ Loop25:	dec r19
 		dec r18
 		brne Loop15
 		ret
+
 
 
 
