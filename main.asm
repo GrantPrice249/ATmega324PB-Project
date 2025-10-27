@@ -10,10 +10,12 @@ out DDRA, r20        ; set PA0 and PA1 as input
 ldi r20, 0x03
 out PORTA, r20
 
+; LED Setup
 LDI R21, 0b00001111
 OUT DDRD, R21
 SBI DDRE, 5
 
+;LED Function
 LED_ON:
 SBI PORTD, 0
 SBRC counter, 0
@@ -92,4 +94,5 @@ delay_500us_loop:
 	dec delayCnt
 	brne delay_500us_loop
 	ret
+
 
