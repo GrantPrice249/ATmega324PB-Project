@@ -46,6 +46,11 @@ LED_ON:
 	RET
 
 
+main:
+	rjmp counter_loop
+	rcall LED_ON
+	
+
 counter_loop:
     in r19, PINA         ; read current button state
     and r19, r18         ; mask to PA0 and PA1
@@ -150,6 +155,7 @@ Loop25:	dec r19
 		dec r18
 		brne Loop15
 		ret
+
 
 
 
