@@ -96,3 +96,22 @@ delay_500us_loop:
 	ret
 
 
+delay1:	ldi r18, 200 ;1kHz delay
+Loop1:	ldi r19, 13
+		nop
+Loop2:	dec r19
+		brne Loop2
+		dec r18
+		brne Loop1
+		ret
+
+delay15:ldi r18, 200 ;1.5kHz delay
+Loop15:	ldi r19, 12
+		nop
+Loop25:	dec r19
+		brne Loop25
+		dec r18
+		brne Loop15
+		ret
+
+
