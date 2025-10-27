@@ -57,7 +57,7 @@ counter_loop:
 	RET
 
 no_change:
-    rjmp counter_loop       ; repeat loop
+    RET       ; repeat loop
 
 ; LED Function
 LED_ON:
@@ -156,6 +156,7 @@ Loop25:	dec r19
 		dec r18
 		brne Loop15
 		ret
+
 
 
 
