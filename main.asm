@@ -1,6 +1,14 @@
 .def counter = r16
 .equ BUZZER = 0
 
+.ORG 0
+LDI counter, HIGH(RAMEND)
+OUT SPH, counter
+LDI counter, LOW(RAMEND)
+OUT SPL, counter
+CLR counter
+
+
 ldi counter, 0x00        ; Counter register
 ldi r17, 0x00        ; Previous button state
 ldi r18, 0x03        ; Mask for PA0 and PA1
@@ -135,6 +143,7 @@ Loop25:	dec r19
 		dec r18
 		brne Loop15
 		ret
+
 
 
 
