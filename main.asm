@@ -1,5 +1,5 @@
 .def counter = r16
-.def temp r17
+.def temp = r17
 .def delayCnt = r18
 .equ BUZZER = 0
 .equ BUTTON3 = 2
@@ -146,6 +146,7 @@ Loop25:	dec r19
 		dec r18
 		brne Loop15
 		ret
+
 
 
 
