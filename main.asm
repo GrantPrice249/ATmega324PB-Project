@@ -117,7 +117,7 @@ delay_1ms:
 	ldi delayCnt, 255
 delay_1ms_loop1:
 	dec delayCnt
-	brne delay_1ms_loop
+	brne delay_1ms_loop1
 	ldi delayCnt, 77
 delay_1ms_loop2:
 	dec delayCnt
@@ -150,6 +150,7 @@ Loop25:	dec r19
 		dec r18
 		brne Loop15
 		ret
+
 
 
 
