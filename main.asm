@@ -33,3 +33,39 @@ counter_loop:
 no_change:
     rjmp counter_loop       ; repeat loop
 
+;plays 1kHz for .499s
+play_alarm:
+	ldi temp, 250 ; 500ms / 2 = (250 cycles)
+tone_loop:
+	sbi PORTB, BUZZER ; Buzzer pin set high
+	rcall delay_500us
+	cbi PORTB, BUZZER; Buzzer pin set low
+	rcall delay_500us
+	dec temp
+	brne tone_loop
+	ret
+
+;100.6 ms delay
+delay_100ms:
+	ldi temp,100
+delay_100ms_loop:
+	rcall delay_1ms
+	dec temp
+	brne delay_100ms_loop
+	ret
+
+;1ms delay
+delay_1ms:
+	ldi delayCnt, 332
+delay_1ms_loop:
+	dec delayCnt
+	brne delay_1ms_loop
+	ret
+
+;500us delay
+delay_500us:
+	ldi delayCnt, 125
+delay_500us_loop:
+	dec delayCnt
+	brne delay_500us_loop
+	ret
