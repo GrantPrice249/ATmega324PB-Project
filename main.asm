@@ -10,6 +10,29 @@ out DDRA, r20        ; set PA0 and PA1 as input
 ldi r20, 0x03
 out PORTA, r20
 
+LDI R21, 0b00001111
+OUT DDRD, R21
+SBI DDRE, 5
+
+LED_ON:
+SBI PORTD, 0
+SBRC counter, 0
+CBI PORTD, 0
+SBI PORTD, 1
+SBRC counter, 1
+CBI PORTD, 1
+SBI PORTD, 2
+SBRC counter, 2
+CBI PORTD, 2
+SBI PORTD, 3
+SBRC counter, 3
+CBI PORTD, 3
+SBI PORTE, 5
+SBRC counter, 4
+CBI PORTE, 5
+RET
+
+
 counter_loop:
     in r19, PINA         ; read current button state
     and r19, r18         ; mask to PA0 and PA1
@@ -69,3 +92,4 @@ delay_500us_loop:
 	dec delayCnt
 	brne delay_500us_loop
 	ret
+
