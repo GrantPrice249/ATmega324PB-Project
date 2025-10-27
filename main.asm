@@ -6,8 +6,6 @@ LDI counter, HIGH(RAMEND)
 OUT SPH, counter
 LDI counter, LOW(RAMEND)
 OUT SPL, counter
-CLR counter
-
 
 ldi counter, 0x00        ; Counter register
 ldi r17, 0x00        ; Previous button state
@@ -144,6 +142,7 @@ Loop25:	dec r19
 		dec r18
 		brne Loop15
 		ret
+
 
 
 
