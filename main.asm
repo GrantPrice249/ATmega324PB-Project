@@ -79,8 +79,9 @@ AUTO_DECREMENT:
 	; Decrement counter every 100ms. When counter == 0, go to alarm
 	BREQ ALARM
 	DEC_LOOP:
-		DEC counter
+		tst counter
 		BREQ ALARM
+		DEC counter
 		RCALL delay_100ms
 		RJMP DEC_LOOP
 
@@ -143,6 +144,7 @@ Loop25:	dec r19
 		dec r18
 		brne Loop15
 		ret
+
 
 
 
