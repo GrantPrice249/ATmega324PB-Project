@@ -17,7 +17,7 @@ OUT DDRD, R21
 SBI DDRE, 5
 
 ; LED Function
-	LED_ON:
+LED_ON:
 	SBI PORTD, 0
 	SBRC counter, 0
 	CBI PORTD, 0
@@ -114,6 +114,7 @@ Loop25:	dec r19
 		dec r18
 		brne Loop15
 		ret
+
 
 
 
