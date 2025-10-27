@@ -49,6 +49,10 @@ LED_ON:
 main:
 	rjmp counter_loop
 	rcall LED_ON
+
+	; Auto-Decrement Button
+	SBIS PORTA, 2
+		RCALL AUTO_DECREMENT
 	
 
 counter_loop:
@@ -155,6 +159,7 @@ Loop25:	dec r19
 		dec r18
 		brne Loop15
 		ret
+
 
 
 
