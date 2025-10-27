@@ -16,24 +16,24 @@ LDI R21, 0b00001111
 OUT DDRD, R21
 SBI DDRE, 5
 
-;LED Function
-LED_ON:
-SBI PORTD, 0
-SBRC counter, 0
-CBI PORTD, 0
-SBI PORTD, 1
-SBRC counter, 1
-CBI PORTD, 1
-SBI PORTD, 2
-SBRC counter, 2
-CBI PORTD, 2
-SBI PORTD, 3
-SBRC counter, 3
-CBI PORTD, 3
-SBI PORTE, 5
-SBRC counter, 4
-CBI PORTE, 5
-RET
+; LED Function
+	LED_ON:
+	SBI PORTD, 0
+	SBRC counter, 0
+	CBI PORTD, 0
+	SBI PORTD, 1
+	SBRC counter, 1
+	CBI PORTD, 1
+	SBI PORTD, 2
+	SBRC counter, 2
+	CBI PORTD, 2
+	SBI PORTD, 3
+	SBRC counter, 3
+	CBI PORTD, 3
+	SBI PORTE, 5
+	SBRC counter, 4
+	CBI PORTE, 5
+	RET
 
 
 counter_loop:
@@ -114,6 +114,7 @@ Loop25:	dec r19
 		dec r18
 		brne Loop15
 		ret
+
 
 
 
