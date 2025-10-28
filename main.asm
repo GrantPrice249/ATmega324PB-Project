@@ -40,17 +40,21 @@ counter_loop:
     in r19, PINA         ; read current button state
     and r19, r18         ; mask to PA0 and PA1
 
+	; Auto-Decrement Button
+	SBIS PORTA, 2
+		RCALL AUTO_DECREMENT
+
     ; Check for button press and release
     cp r19, r17          ; compare current and previous state
     breq no_change       ; if same, reset loop
 
     ; Button 1 (PA0) pressed
     sbrs r19, 0          ; skip if bit 0 is set
-    inc counter              ; increment counter
+    rcall TwentyFivetoZero ; checks for overflow and increments counter if not exists
 
     ; Button 2 (PA1) pressed
     sbrs r19, 1          ; skip if bit 1 is set
-    dec counter              ; decrement counter
+    rcall ZeroToTwentyFive   ; checks for overflow and decrements counter if not exists
 
     ; Update previous state
     mov r17, r19
@@ -156,6 +160,40 @@ Loop25:	dec r19
 		brne Loop25
 		dec r18
 		brne Loop15
+		ret
+
+TwentyFivetoZero: ; Plays a sound if the counter increments past 25 and resets it to zero
+		ldi r28, 25
+		cp r28, r16
+		breq IsTwentyFive
+		inc counter
+		ret
+	IsTwentyFive:	
+		ldi temp, 100
+		sbi PORTE4, BUZZER ; Buzzer pin set high
+		rcall delay15
+		cbi PORTE4, BUZZER; Buzzer pin set low
+		rcall delay15
+		dec temp
+		brne IsTwentyFive
+		ldi counter, 0
+		ret
+
+ZeroToTwentyFive: ; Plays a sound if the counter decrements below 0 and resets it to 25
+		ldi r28, 0
+		cp r28, r16
+		breq IsTwentyFive
+		dec counter
+		ret
+	IsZero:	
+		ldi temp, 100
+		sbi PORTE4, BUZZER ; Buzzer pin set high
+		rcall delay1
+		cbi PORTE4, BUZZER; Buzzer pin set low
+		rcall delay1
+		dec temp
+		brne IsZero
+		ldi counter, 25
 		ret
 
 
