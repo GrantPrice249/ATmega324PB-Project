@@ -40,10 +40,6 @@ counter_loop:
     in r19, PINA         ; read current button state
     and r19, r18         ; mask to PA0 and PA1
 
-	; Auto-Decrement Button
-	SBIS PORTA, 2
-		RCALL AUTO_DECREMENT
-
     ; Check for button press and release
     cp r19, r17          ; compare current and previous state
     breq no_change       ; if same, reset loop
@@ -196,5 +192,6 @@ ZeroToTwentyFive: ; Plays a sound if the counter decrements below 0 and resets i
 			brne ZeroLoop
 		ldi counter, 25
 		ret
+
 
 
