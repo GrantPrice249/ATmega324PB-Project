@@ -30,7 +30,7 @@ main:
 	rcall counter_loop
 
 	; Auto-Decrement Button
-	SBIS PORTA, 2
+	SBIC PINA, 2
 		RCALL AUTO_DECREMENT
 	rcall LED_ON
 	rjmp main
@@ -85,11 +85,10 @@ LED_ON:
 AUTO_DECREMENT:
 	; Wait for button to be released
 	NOT_RELEASED:
-		SBIS PINA, 2 ; changed to SBIS 
+		SBIC PINA, 2
 			RJMP NOT_RELEASED
 
 	; Decrement counter every 100ms. When counter == 0, go to alarm
-	BREQ ALARM
 	DEC_LOOP:
 		tst counter
 		BREQ ALARM
@@ -195,6 +194,7 @@ ZeroToTwentyFive: ; Plays a sound if the counter decrements below 0 and resets i
 		brne IsZero
 		ldi counter, 25
 		ret
+
 
 
 
