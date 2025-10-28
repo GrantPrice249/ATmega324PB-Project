@@ -30,7 +30,7 @@ main:
 	rcall counter_loop
 
 	; Auto-Decrement Button
-	SBIC PINA, 2
+	SBIS PINA, 2
 		RCALL AUTO_DECREMENT
 	rcall LED_ON
 	rjmp main
@@ -85,7 +85,7 @@ LED_ON:
 AUTO_DECREMENT:
 	; Wait for button to be released
 	NOT_RELEASED:
-		SBIC PINA, 2
+		SBIS PINA, 2
 			RJMP NOT_RELEASED
 
 	; Decrement counter every 100ms. When counter == 0, go to alarm
@@ -196,3 +196,4 @@ ZeroToTwentyFive: ; Plays a sound if the counter decrements below 0 and resets i
 			brne ZeroLoop
 		ldi counter, 25
 		ret
+
