@@ -102,9 +102,9 @@ AUTO_DECREMENT:
 play_alarm:
 	ldi temp, 250 ; 500ms / 2 = (250 cycles)
 tone_loop:
-	sbi PORTE4, BUZZER ; Buzzer pin set high
+	sbi PORTE, 4 ; Buzzer pin set high
 	rcall delay_500us
-	cbi PORTE4, BUZZER; Buzzer pin set low
+	cbi PORTE, 4; Buzzer pin set low
 	rcall delay_500us
 	dec temp
 	brne tone_loop
@@ -202,6 +202,7 @@ ZeroToTwentyFive: ; Plays a sound if the counter decrements below 0 and resets i
 			brne ZeroLoop
 		ldi counter, 25
 		ret
+
 
 
 
