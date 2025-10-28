@@ -143,21 +143,21 @@ delay_500us_loop:
 	ret
 
 
-delay1:	ldi r18, 200 ;1kHz delay
-Loop1:	ldi r19, 13
+delay1:	ldi r30, 200 ;1kHz delay
+Loop1:	ldi r31, 13
 		nop
-Loop2:	dec r19
+Loop2:	dec r31
 		brne Loop2
-		dec r18
+		dec r30
 		brne Loop1
 		ret
 
-delay15:ldi r18, 200 ;1.5kHz delay
-Loop15:	ldi r19, 12
+delay15:ldi r30, 200 ;1.5kHz delay
+Loop15:	ldi r31, 12
 		nop
-Loop25:	dec r19
+Loop25:	dec r31
 		brne Loop25
-		dec r18
+		dec r30
 		brne Loop15
 		ret
 
@@ -196,4 +196,5 @@ ZeroToTwentyFive: ; Plays a sound if the counter decrements below 0 and resets i
 			brne ZeroLoop
 		ldi counter, 25
 		ret
+
 
