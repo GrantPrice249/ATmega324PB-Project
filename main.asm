@@ -81,7 +81,7 @@ LED_ON:
 AUTO_DECREMENT:
 	; Wait for button to be released
 	NOT_RELEASED:
-		SBIS PINA, 2 ;
+		SBIS PINA, 2 ; changed to SBIS 
 			RJMP NOT_RELEASED
 
 	; Decrement counter every 100ms. When counter == 0, go to alarm
@@ -90,6 +90,7 @@ AUTO_DECREMENT:
 		tst counter
 		BREQ ALARM
 		DEC counter
+		RCALL LED_ON ; added to update LED
 		RCALL delay_100ms
 		RJMP DEC_LOOP
 
@@ -156,6 +157,7 @@ Loop25:	dec r19
 		dec r18
 		brne Loop15
 		ret
+
 
 
 
