@@ -163,64 +163,36 @@ Loop25:	dec r19
 
 TwentyFivetoZero: ; Plays a sound if the counter increments past 25 and resets it to zero
 		ldi r28, 25
-		cp r28, r16
+		cp r28, counter
 		breq IsTwentyFive
 		inc counter
 		ret
 	IsTwentyFive:	
 		ldi temp, 100
-		sbi PORTE4, BUZZER ; Buzzer pin set high
-		rcall delay15
-		cbi PORTE4, BUZZER; Buzzer pin set low
-		rcall delay15
-		dec temp
-		brne IsTwentyFive
+		TwentyFiveLoop: 
+			sbi PORTE4, BUZZER ; Buzzer pin set high
+			rcall delay15
+			cbi PORTE4, BUZZER; Buzzer pin set low
+			rcall delay15
+			dec temp
+			brne TwentyFiveLoop
 		ldi counter, 0
 		ret
 
 ZeroToTwentyFive: ; Plays a sound if the counter decrements below 0 and resets it to 25
 		ldi r28, 0
-		cp r28, r16
-		breq IsTwentyFive
+		cp r28, counter
+		breq IsZero
 		dec counter
 		ret
 	IsZero:	
 		ldi temp, 100
-		sbi PORTE4, BUZZER ; Buzzer pin set high
-		rcall delay1
-		cbi PORTE4, BUZZER; Buzzer pin set low
-		rcall delay1
-		dec temp
-		brne IsZero
+		ZeroLoop: 
+			sbi PORTE4, BUZZER ; Buzzer pin set high
+			rcall delay1
+			cbi PORTE4, BUZZER; Buzzer pin set low
+			rcall delay1
+			dec temp
+			brne ZeroLoop
 		ldi counter, 25
 		ret
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
