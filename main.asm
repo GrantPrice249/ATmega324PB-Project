@@ -118,7 +118,15 @@ delay_100ms_loop:
 	dec temp
 	brne delay_100ms_loop
 	ret
-
+delay_500ms:
+	ldi delayCnt, 5
+	rcall delay_500ms_loop
+delay_500ms_loop:
+	rcall delay_100ms
+	dec delayCnt
+	cp delayCnt, 0
+	brne delay_500ms_loop
+	ret
 ;1ms delay
 delay_1ms:
 	ldi delayCnt, 255
@@ -193,6 +201,7 @@ ZeroToTwentyFive: ; Plays a sound if the counter decrements below 0 and resets i
 			brne ZeroLoop
 		ldi counter, 25
 		ret
+
 
 
 
