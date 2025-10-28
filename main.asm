@@ -1,5 +1,5 @@
 .def counter = r16
-.def temp = r17
+.def temp = r27
 .def delayCnt = r28
 .equ BUZZER = 0
 .equ BUTTON3 = 2
@@ -58,6 +58,7 @@ counter_loop:
 	RET
 
 no_change:
+	rcall delay_500ms
     RET       ; repeat loop
 
 ; LED Function
@@ -100,7 +101,15 @@ AUTO_DECREMENT:
 
 ;plays 1kHz for .499s
 play_alarm:
-	ldi temp, 250 ; 500ms / 2 = (250 cycles)
+	ldi temp, 100 
+	sbi PORTE, 4 ; Buzzer pin set high
+	rcall delay15
+	cbi PORTE, 4; Buzzer pin set low
+	rcall delay15
+	dec temp
+	brne TwentyFiveLoop
+	ldi counter, 0
+	ret
 tone_loop:
 	sbi PORTE, 4 ; Buzzer pin set high
 	rcall delay_500us
@@ -120,12 +129,10 @@ delay_100ms_loop:
 	ret
 ; 500ms delay
 delay_500ms:
-	ldi delayCnt, 5
-	rcall delay_500ms_loop
+	ldi r29,5
 delay_500ms_loop:
 	rcall delay_100ms
-	dec delayCnt
-	cpi delayCnt, 0
+	dec r29
 	brne delay_500ms_loop
 	ret
 ;1ms delay
@@ -202,9 +209,6 @@ ZeroToTwentyFive: ; Plays a sound if the counter decrements below 0 and resets i
 			brne ZeroLoop
 		ldi counter, 25
 		ret
-
-
-
 
 
 
