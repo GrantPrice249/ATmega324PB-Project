@@ -25,6 +25,7 @@ out PORTA, r20
 LDI R21, 0b00001111
 OUT DDRD, R21
 SBI DDRE, 5
+SBI DDRE, 4
 
 main:
 	rcall counter_loop
@@ -192,6 +193,7 @@ ZeroToTwentyFive: ; Plays a sound if the counter decrements below 0 and resets i
 			brne ZeroLoop
 		ldi counter, 25
 		ret
+
 
 
 
