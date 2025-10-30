@@ -119,7 +119,7 @@ tone_loop:
 	brne tone_loop
 	ret
 
-;100.6 ms delay
+;100 ms delay
 delay_100ms:
 	ldi temp,100
 delay_100ms_loop:
@@ -127,6 +127,7 @@ delay_100ms_loop:
 	dec temp
 	brne delay_100ms_loop
 	ret
+
 ; 500ms delay
 delay_500ms:
 	ldi r29,5
@@ -135,16 +136,21 @@ delay_500ms_loop:
 	dec r29
 	brne delay_500ms_loop
 	ret
+
 ;1ms delay
 delay_1ms:
-	ldi delayCnt, 255
+	ldi delayCnt, 2
 delay_1ms_loop1:
 	dec delayCnt
 	brne delay_1ms_loop1
-	ldi delayCnt, 77
+	ldi delayCnt, 55
 delay_1ms_loop2:
 	dec delayCnt
 	brne delay_1ms_loop2
+	ldi delayCnt 145
+delay_1ms_loop3:
+	dec delayCnt
+	brne delay_1ms_loop3
 	ret
 
 ;500us delay
@@ -209,6 +215,7 @@ ZeroToTwentyFive: ; Plays a sound if the counter decrements below 0 and resets i
 			brne ZeroLoop
 		ldi counter, 25
 		ret
+
 
 
 
