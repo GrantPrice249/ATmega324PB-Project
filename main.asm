@@ -92,6 +92,8 @@ AUTO_DECREMENT:
 		DEC counter
 		RCALL LED_ON ; added to update LED
 		RCALL delay_100ms
+		RCALL delay_100ms
+		RCALL delay_100ms
 		RJMP DEC_LOOP
 
 	ALARM:
@@ -214,6 +216,7 @@ ZeroToTwentyFive: ; Plays a sound if the counter decrements below 0 and resets i
 			brne ZeroLoop
 		ldi counter, 25
 		ret
+
 
 
 
