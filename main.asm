@@ -1,6 +1,5 @@
 .def counter = r16
 .def temp = r25
-.def delayCnt = r26
 .equ BUZZER = 0
 .equ BUTTON3 = 2
 
@@ -139,17 +138,17 @@ delay_500ms_loop:
 
 ;1ms delay
 delay_1ms:
-	ldi delayCnt, 255
+	ldi r22, 255
 delay_1ms_loop1:
-	dec delayCnt
+	dec r22
 	brne delay_1ms_loop1
-	ldi delayCnt, 255
+	ldi r23, 255
 delay_1ms_loop2:
-	dec delayCnt
+	dec r23
 	brne delay_1ms_loop2
-	ldi delayCnt, 255
+	ldi r24, 255
 delay_1ms_loop3:
-	dec delayCnt
+	dec r24
 	brne delay_1ms_loop3
 	ret
 
@@ -215,6 +214,7 @@ ZeroToTwentyFive: ; Plays a sound if the counter decrements below 0 and resets i
 			brne ZeroLoop
 		ldi counter, 25
 		ret
+
 
 
 
