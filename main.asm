@@ -58,7 +58,7 @@ counter_loop:
 	RET
 
 no_change:
-	rcall delay_500ms
+	; rcall delay_500ms NEEDS TO BE CHANGED TO EITHER SHORTER DURATION OR DELAY WHEN PRESSED -----------------------------------------------------------------------------------
     RET       ; repeat loop
 
 ; LED Function
@@ -91,10 +91,8 @@ AUTO_DECREMENT:
 		tst counter
 		BREQ ALARM
 		DEC counter
-		RCALL LED_ON ; added to update LED
-		RCALL delay_100ms
-		RCALL delay_100ms
-		RCALL delay_100ms
+		RCALL LED_ON
+		RCALL delay_1ms; NEEDS TO BE CHANGED TO CORRECT TIMING CALL WHEN FIXED -------------------------------------------------------------------------------------------------------
 		RJMP DEC_LOOP
 
 	ALARM:
@@ -214,22 +212,3 @@ ZeroToTwentyFive: ; Plays a sound if the counter decrements below 0 and resets i
 			brne ZeroLoop
 		ldi counter, 25
 		ret
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
