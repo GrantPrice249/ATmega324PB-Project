@@ -1,5 +1,6 @@
 .def counter = r16
 .def temp = r25
+.def delayCnt = r26
 .equ BUZZER = 0
 .equ BUTTON3 = 2
 
@@ -216,6 +217,7 @@ ZeroToTwentyFive: ; Plays a sound if the counter decrements below 0 and resets i
 			brne ZeroLoop
 		ldi counter, 25
 		ret
+
 
 
 
