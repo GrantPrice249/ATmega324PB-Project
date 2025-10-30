@@ -139,15 +139,15 @@ delay_500ms_loop:
 
 ;1ms delay
 delay_1ms:
-	ldi delayCnt, 100
+	ldi delayCnt, 1
 delay_1ms_loop1:
 	dec delayCnt
 	brne delay_1ms_loop1
-	ldi delayCnt, 55
+	ldi delayCnt, 10
 delay_1ms_loop2:
 	dec delayCnt
 	brne delay_1ms_loop2
-	ldi delayCnt 145
+	ldi delayCnt 151
 delay_1ms_loop3:
 	dec delayCnt
 	brne delay_1ms_loop3
@@ -215,6 +215,7 @@ ZeroToTwentyFive: ; Plays a sound if the counter decrements below 0 and resets i
 			brne ZeroLoop
 		ldi counter, 25
 		ret
+
 
 
 
