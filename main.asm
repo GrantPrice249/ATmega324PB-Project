@@ -122,12 +122,9 @@ tone_loop:
 	ret
 
 ;100 ms delay
-delay_100ms:
-	ldi temp,100
-delay_100ms_loop:
-	rcall delay_1ms
-	dec temp
-	brne delay_100ms_loop
+delay_100ms: ldi temp, 100
+loop11: dec r24
+	brne loop11
 	ret
 
 ; 500ms delay
@@ -217,6 +214,7 @@ ZeroToTwentyFive: ; Plays a sound if the counter decrements below 0 and resets i
 			brne ZeroLoop
 		ldi counter, 25
 		ret
+
 
 
 
