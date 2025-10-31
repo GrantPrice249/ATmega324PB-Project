@@ -17,7 +17,7 @@ ldi r18, 0x03        ; Mask for PA0 and PA1
 
 ; set PORTA as input
 ldi r20, 0x00
-out DDRA, r20        ; set PA0 and PA1 as input
+out DDRA, r20
 ldi r20, 0x07
 out PORTA, r20
 
@@ -28,14 +28,17 @@ SBI DDRE, 5
 SBI DDRE, 4
 
 main:
+	; Increment/Decrement Buttons
 	rcall counter_loop
 
 	; Auto-Decrement Button
 	SBIS PINA, 2
 		RCALL AUTO_DECREMENT
+
+	; Update LEDs
 	rcall LED_ON
+
 	rjmp main
-	
 
 counter_loop:
     in r19, PINA         ; read current button state
@@ -55,11 +58,13 @@ counter_loop:
 
     ; Update previous state
     mov r17, r19
+
+	; Delay so flickering switch doesn't cause multiple increments/decrements
+	rcall delay_500ms
 	RET
 
 no_change:
-	; rcall delay_500ms NEEDS TO BE CHANGED TO EITHER SHORTER DURATION OR DELAY WHEN PRESSED -----------------------------------------------------------------------------------
-    RET       ; repeat loop
+    RET; Return to main loop
 
 ; LED Function
 LED_ON:
@@ -200,5 +205,6 @@ ZeroToTwentyFive: ; Plays a sound if the counter decrements below 0 and resets i
 			brne ZeroLoop
 		ldi counter, 25
 		ret
+
 
 
