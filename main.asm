@@ -152,6 +152,14 @@ loop_3: dec r24
 	brne loop_1
 	ret
 
+;500us delay
+delay_500us:
+	ldi delayCnt, 125
+delay_500us_loop:
+	dec delayCnt
+	brne delay_500us_loop
+	ret
+
 delay1:	ldi r30, 200 ;1kHz delay
 Loop1:	ldi r31, 13
 		nop
@@ -205,6 +213,3 @@ ZeroToTwentyFive: ; Plays a sound if the counter decrements below 0 and resets i
 			brne ZeroLoop
 		ldi counter, 25
 		ret
-
-
-
