@@ -1,8 +1,5 @@
 .def counter = r16
 .def temp = r25
-.def delayCnt = r26
-.equ BUZZER = 0
-.equ BUTTON3 = 2
 
 ; Stack Pointer initialization
 .ORG 0
@@ -35,9 +32,6 @@ main:
 	SBIS PINA, 2
 		RCALL AUTO_DECREMENT
 
-	; Update LEDs
-	rcall LED_ON
-
 	rjmp main
 
 counter_loop:
@@ -59,8 +53,11 @@ counter_loop:
     ; Update previous state
     mov r17, r19
 
+	; Update LEDs
+	rcall LED_ON
+
 	; Delay so flickering switch doesn't cause multiple increments/decrements
-	rcall delay_500ms
+	rcall delay_100ms
 	RET
 
 no_change:
@@ -107,46 +104,31 @@ AUTO_DECREMENT:
 ;plays 1kHz for .499s
 play_alarm:
 	ldi temp, 100 
-	sbi PORTE, 4 ; Buzzer pin set high
-	rcall delay15
-	cbi PORTE, 4; Buzzer pin set low
-	rcall delay15
-	dec temp
-	brne TwentyFiveLoop
+	;sbi PORTE, 4 ; Buzzer pin set high
+	;rcall delay15
+	;cbi PORTE, 4; Buzzer pin set low
+	;rcall delay15
+	tone_loop:
+		sbi PORTE, 4 ; Buzzer pin set high
+		rcall delay_500us
+		cbi PORTE, 4; Buzzer pin set low
+		rcall delay_500us
+		dec temp
+		brne tone_loop
 	ldi counter, 0
-	ret
-tone_loop:
-	sbi PORTE, 4 ; Buzzer pin set high
-	rcall delay_500us
-	cbi PORTE, 4; Buzzer pin set low
-	rcall delay_500us
-	dec temp
-	brne tone_loop
 	ret
 
 ;100 ms delay
-delay_100ms: ldi temp, 100
+delay_100ms: ldi temp, 35
 loop11: rcall delay_1ms
 	dec temp
 	brne loop11
 	ret
 
-; 500ms delay
-delay_500ms:
-	ldi r29,5
-delay_500ms_loop:
-	rcall delay_100ms
-	dec r29
-	brne delay_500ms_loop
-	ret
-
 ;1ms delay
 delay_1ms: ldi r22, 100
-loop_1: ldi r23, 100
-loop_2: ldi r24, 160
-loop_3: dec r24
-	brne loop_3
-	dec r23
+loop_1: ldi r23, 160
+loop_2: dec r23
 	brne loop_2
 	dec r22
 	brne loop_1
@@ -239,5 +221,3 @@ ZeroToTwentyFive: ; Plays a sound if the counter decrements below 0 and resets i
 			brne ZeroLoop
 		ldi counter, 25
 		ret
-
-
