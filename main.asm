@@ -155,9 +155,27 @@ loop_3: dec r24
 ;500us delay
 delay_500us:
     ldi r27, 250         ; outer loop count
-loop___1:
+loop___1:				; we ran out of registers :(
+	nop					; I needed 26 nops for the math to be right 
 	nop
 	nop
+	nop
+	nop
+	nop
+	nop
+	nop
+	nop
+	nop
+	nop
+	nop	
+	nop
+	nop
+	nop
+	nop
+	nop
+	nop
+	nop
+	nop	
 	nop
 	nop
 	nop
@@ -221,4 +239,5 @@ ZeroToTwentyFive: ; Plays a sound if the counter decrements below 0 and resets i
 			brne ZeroLoop
 		ldi counter, 25
 		ret
+
 
